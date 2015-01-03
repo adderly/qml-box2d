@@ -6,25 +6,26 @@ import Box2D 2.0
 */
 Body {
     world: physicsWorld
+    property var window: screen
 
     Box {
-        y: screen.height
-        width: screen.width
+        y: window.height
+        width: window.width
         height: 32
     }
     Box {
         y: -32
         height: 32
-        width: screen.width
+        width: window.width
     }
     Box {
         x: -32
         width: 32
-        height: screen.height
+        height: window.height
     }
     Box {
-        x: screen.width
+        x: window.width
         width: 32
-        height: screen.height
+        height: window.height
     }
 }

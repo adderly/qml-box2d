@@ -3,7 +3,7 @@ import Box2D 2.0
 import "../shared"
 
 Item {
-    id: screen
+    id: root
     width: 800
     height: 600
     focus: true
@@ -11,7 +11,9 @@ Item {
     // BOX2D WORLD
     World { id: physicsWorld }
 
-    ScreenBoundaries {}
+    ScreenBoundaries {
+        window: root
+    }
 
     Ball {
         id: ball
