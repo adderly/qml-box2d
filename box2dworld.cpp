@@ -145,9 +145,17 @@ Box2DWorld::~Box2DWorld()
     // important that they are no longer referenced from the Box2DBody and
     // Box2DJoint instances.
     for (b2Body *body = mWorld.GetBodyList(); body; body = body->GetNext())
-        toBox2DBody(body)->nullifyBody();
+    {
+        Box2DBody *pBox2DBody = toBox2DBody(body);
+        if(pBox2DBody != NULL)
+            pBox2DBody->nullifyBody();
+    }
     for (b2Joint *joint = mWorld.GetJointList(); joint; joint = joint->GetNext())
-        toBox2DJoint(joint)->nullifyJoint();
+    {
+        Box2DJoint* pBox2DJoint = toBox2DJoint(joint);
+        if(pBox2DJoint != NULL)
+            toBox2DJoint(joint)->nullifyJoint();
+    }
     enableContactListener(false);
 }
 
@@ -289,8 +297,11 @@ void Box2DWorld::step()
     // Update Box2D state before stepping
     for (b2Body *body = mWorld.GetBodyList(); body; body = body->GetNext()) {
         Box2DBody *b = toBox2DBody(body);
-        if (b->transformDirty() && b->isActive())
-            b->updateTransform();
+        if(b != NULL)
+        {
+            if (b->transformDirty() && b->isActive())
+                b->updateTransform();
+        }
     }
 
     mWorld.Step(mTimeStep, mVelocityIterations, mPositionIterations);
@@ -301,8 +312,11 @@ void Box2DWorld::step()
     mSynchronizing = true;
     for (b2Body *body = mWorld.GetBodyList(); body; body = body->GetNext()) {
         Box2DBody *b = toBox2DBody(body);
-        if (b->isActive() && b->bodyType() != Box2DBody::Static && b->target())
-            b->synchronize();
+        if(b != NULL)
+        {
+            if (b->isActive() && b->bodyType() != Box2DBody::Static && b->target())
+                b->synchronize();
+        }
     }
     mSynchronizing = false;
 
