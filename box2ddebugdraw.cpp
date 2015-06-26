@@ -53,6 +53,9 @@ public:
                     const b2Color &color);
     void DrawSolidCircle(const b2Vec2 &center, float32 radius,
                          const b2Vec2 &axis, const b2Color &color);
+    /// Draw a particle array
+    virtual void DrawParticles(const b2Vec2 *centers, float32 radius,
+                            const b2ParticleColor *colors, int32 count);
     void DrawSegment(const b2Vec2 &p1, const b2Vec2 &p2,
                      const b2Color &color);
     void DrawTransform(const b2Transform &xf);
@@ -195,6 +198,14 @@ void DebugDraw::DrawSolidCircle(const b2Vec2 &center, float32 radius,
     axisGeometry->vertexDataAsPoint2D()[0].set(centerInPixels.x(), centerInPixels.y());
     axisGeometry->vertexDataAsPoint2D()[1].set(axisInPixels.x(), axisInPixels.y());
     createNode(axisGeometry, qRgb(200, 64, 0), node);
+}
+
+void DebugDraw::DrawParticles(const b2Vec2 *centers, float32 radius, const b2ParticleColor *colors, int32 count){
+//    DebugRenderer* debugRenderer = Renderer::getCurrent()->getDebugRenderer();
+//    for (int i = 0; i < count; ++i) {
+//        debugRenderer->queueCircle(centers[i], radius, PARTICLE_CIRCLE_SEGMENTS,
+//                b2ColorToRgba(colors[i], 0xFF));
+//    }
 }
 
 void DebugDraw::DrawSegment(const b2Vec2 &p1,

@@ -15,8 +15,11 @@
 #      ...
 #  }
 
-INCLUDEPATH += $$PWD
-include(Box2D/box2d.pri)
+#!contains(INCLUDE_PATH,QML_BOX2D){
+    INCLUDEPATH += $$PWD
+#}
+#include(../liquidfun/liquidfun/Box2D/Box2D/box2d.pri)
+#include(Box2D/box2d.pri)
 
 DEFINES += STATIC_PLUGIN_BOX2D
 
@@ -62,4 +65,5 @@ HEADERS += \
     $$PWD/box2dgearjoint.h \
     $$PWD/box2dropejoint.h \
     $$PWD/box2draycast.h
+
 
